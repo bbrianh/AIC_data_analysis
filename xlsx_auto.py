@@ -35,7 +35,8 @@ def predict(image_df, testpath, submitpath):
         line = []
 
         for i in range(_NUM_OF_MODELS):
-            model = load_model(workpath + 'sign%d.h5' % i)
+            model_num = i+1
+            model = load_model(workpath + 'sign%d.h5' % model_num)
             size = model_size[i]
 
             # [FREE TO UPDATE - begin] The prediction being made by your logic and / or model(s)
