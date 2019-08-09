@@ -10,6 +10,7 @@ def predict(image_df, testpath, submitpath):
     _NUM_OF_MODELS = 9
     model_size = []
     # input your model sizes
+    #put the best one in model_size[0] and name it sign0.h5
 
     # [DO NOT CHANGE] load the CSV file for evaluation
     workpath = submitpath.rsplit('/', 1)[0] + '/'
@@ -52,7 +53,7 @@ def predict(image_df, testpath, submitpath):
             if count >= 5:
                 ans = mode
             else:
-                ans = line[3]
+                ans = line[0]
 
         final_decision.append(ans)
 
