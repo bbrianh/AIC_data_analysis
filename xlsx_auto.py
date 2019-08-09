@@ -4,7 +4,13 @@ from keras.models import load_model
 from PIL import Image
 import pandas
 
+
 def predict(image_df, testpath, submitpath):
+    # 9 models
+    _NUM_OF_MODELS = 9
+    model_size = []
+    # input your model sizes
+
     # [DO NOT CHANGE] load the CSV file for evaluation
     workpath = submitpath.rsplit('/', 1)[0] + '/'
 
@@ -25,10 +31,9 @@ def predict(image_df, testpath, submitpath):
         img = cv2.imread(imagepath, cv2.IMREAD_COLOR)
         img = img[min(y1, y2):max(y1, y2), min(x1, x2):max(x1, x2)]
 
-        # load 9 models
-        model_size = []
         line = []
-        for i in range(9):
+
+        for i in range(_NUM_OF_MODELS):
             model = load_model(workpath + 'sign%d.h5' % i)
             size = model_size[i]
 
@@ -44,7 +49,7 @@ def predict(image_df, testpath, submitpath):
             b_count = np.bincount(line)
             mode = np.argmax(b_count)
             count = np.max(b_count)
-            if count>=5:
+            if count >= 5:
                 ans = mode
             else:
                 ans = line[3]
